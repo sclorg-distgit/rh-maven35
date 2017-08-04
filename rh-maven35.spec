@@ -9,7 +9,7 @@
 
 Name:       %scl_name
 Version:    1
-Release:    1%{?dist}
+Release:    1.1%{?dist}
 Summary:    Package that installs %scl
 
 License:    GPLv2+
@@ -170,5 +170,8 @@ install -m 644 %{scl_name}.7 %{buildroot}%{_mandir}/man7/%{scl_name}.7
 %{_root_sysconfdir}/rpm/macros.%{scl_name_prefix}%{scl_name_base}-scldevel
 
 %changelog
+* Thu Jun 22 2017 Michael Simacek <msimacek@redhat.com> - 1-1.1
+- Mass rebuild 2017-06-22
+
 * Thu Jun 22 2017 Michael Simacek <msimacek@redhat.com> - 1-1
 - Initial version
