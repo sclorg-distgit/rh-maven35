@@ -9,7 +9,7 @@
 
 Name:       %scl_name
 Version:    1
-Release:    1.1%{?dist}
+Release:    1.2%{?dist}
 Summary:    Package that installs %scl
 
 License:    GPLv2+
@@ -153,6 +153,9 @@ install -m 755 -d %{buildroot}%{_mandir}/man1
 install -m 755 -d %{buildroot}%{_mandir}/man7
 install -m 644 %{scl_name}.7 %{buildroot}%{_mandir}/man7/%{scl_name}.7
 
+# Workaround for rhbz#1488110 (part 1)
+mkdir -p %{buildroot}%{_libdir}
+
 %files
 # empty main package
 
@@ -162,6 +165,8 @@ install -m 644 %{scl_name}.7 %{buildroot}%{_mandir}/man7/%{scl_name}.7
 %{_mandir}/*
 %{_prefix}/lib/python2.*
 %{_defaultlicensedir}
+# Workaround for rhbz#1488110 (part 2)
+%dir %attr(555,root,root) %{_libdir}
 
 %files build
 %{_root_sysconfdir}/rpm/macros.%{scl}-config
@@ -170,6 +175,9 @@ install -m 644 %{scl_name}.7 %{buildroot}%{_mandir}/man7/%{scl_name}.7
 %{_root_sysconfdir}/rpm/macros.%{scl_name_prefix}%{scl_name_base}-scldevel
 
 %changelog
+* Tue Sep 26 2017 Michael Simacek <msimacek@redhat.com> - 1-1.2
+- Add workaround for rhbz#1488110 (lib64 not owned on aarch64 and ppc64le)
+
 * Thu Jun 22 2017 Michael Simacek <msimacek@redhat.com> - 1-1.1
 - Mass rebuild 2017-06-22
 
